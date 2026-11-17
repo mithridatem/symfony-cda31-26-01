@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+{% block title %}
+Détail category
+{% endblock %}
+{% block body %}
+<section>
+    {% if category %}
+    <article>
+        <h2>Name : {{ category.name }}</h2>
+        <h3>Id : {{ category.id }}</h3>
+    </article>
+    {% else %}
+    <h2>La category n'existe pas</h2>
+    {% endif %}
+    <a href="{{ path('app_categories') }}">Retour</a>
+</section>  
+{% endblock %}
