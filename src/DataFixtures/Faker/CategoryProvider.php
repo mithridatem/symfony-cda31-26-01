@@ -6,9 +6,9 @@ use Faker\Provider\Base;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
 #[AutoconfigureTag('foundry.faker_provider')]
-final class CategoryProvider
+final class CategoryProvider extends Base
 {
-    private const GENRES = [
+    private const array GENRES = [
         "Polar",
         "Science Fiction",
         "Fantastique",
