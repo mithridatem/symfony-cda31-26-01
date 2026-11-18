@@ -1,0 +1,9 @@
+{# templates/components/GenericCard.html.twig #}
+{% include "components/BaseCard.html.twig" %}
+{% for key, value in objet %}
+    {% if key == "name" %}
+        <h2>{{ value }}</h2>
+        {% else %}
+        <p>{{ value }}</p>
+    {% endif %}
+{% endfor %}

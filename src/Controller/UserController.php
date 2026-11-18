@@ -31,7 +31,6 @@ final class UserController extends AbstractController
         $users = $this->userService->getUsers();
         $data = $this->normalizer->normalize($users, null, [
             "attributes" => [
-                "id",
                 "firstname",
                 "lastname",
                 "email"
