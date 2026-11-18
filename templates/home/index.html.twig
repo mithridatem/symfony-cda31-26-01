@@ -2,11 +2,10 @@
 {% block title %}Accueil · Bibliothèque{% endblock %}
 {% block body %}
 
-{# 
-# ou avec la syntaxe
-<twig:InfoCard
-    title="{{ titre }}"
-    description="{{ desc }}"
-/>
-#}
+
+
+<twig:Badge label="Débutant" />
+<twig:Badge label="Intermédiaire" variant="primary" />
+<twig:Badge label="Avancé" variant="success" />
+
 {% endblock %}
