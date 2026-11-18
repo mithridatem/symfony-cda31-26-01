@@ -8,7 +8,7 @@ use App\Entity\User;
 class UserService
 {
     public function __construct(
-        private UserRepository $userRepository
+        private readonly UserRepository $userRepository
     ) {}
 
     public function getUsers(): array

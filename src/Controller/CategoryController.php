@@ -10,7 +10,7 @@ use App\Service\CategoryService;
 class CategoryController extends AbstractController
 {
     public function __construct(
-        private CategoryService $categoryService
+        private readonly CategoryService $categoryService
     )  {}
 
     #[Route(path:'/categories', name: 'app_categories')]

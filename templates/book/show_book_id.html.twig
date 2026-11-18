@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+{% block title %} 
+Liste des livres
+{% endblock %}
+{% block body %}
+
+    {% if book %}
+    <h1>Détail du livre </h1>
+       <article>
+        <h2>Titre {{ book.title }}</h2>
+        <textarea readonly>{{ book.resume }}</textarea>
+        <h3>Date de publication {{ book.publishAt | date('d-m-Y') }}</h3>
+        <h3>Auteur :  {{ book.author }} </h3>
+        <h3>Appartiens à : {{ book.user.firstname }} . {{ book.user.lastname }}</h3>
+        <ul>
+        {% for category in book.categories %}
+            <li>{{ category.name }}</li>
+        {% endfor %}
+        </ul>
+       </article> 
+    {% else %}
+    <h2>La Livre n'existe pas</h2>        
+    {% endif %}
+    <a href="{{ path('app_books')}}">Retour à la liste</a>
+
+{% endblock %}
