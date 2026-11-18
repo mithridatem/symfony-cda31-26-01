@@ -2,11 +2,27 @@
 {% block title %}Accueil · Bibliothèque{% endblock %}
 {% block body %}
 
-{# 
-# ou avec la syntaxe
-<twig:InfoCard
-    title="{{ titre }}"
-    description="{{ desc }}"
+{% for formation in formations %}
+    <twig:FormationCard 
+    :title="formation.title"
+    :description="formation.description"
+    />
+{% endfor %}
+<twig:Alert 
+:message="messages[0]" />
+<twig:Alert 
+:message="messages[1]" 
+:type="types[1]" />
+<twig:Alert 
+:message="messages[2]" 
+:type="types[2]" />
+
+{# Badge #}
+<twig:Badge
+label="Validé"
 />
-#}
+<twig:Badge
+label="Ajouté avec success"
+variant="primary"
+year="2025"/>
 {% endblock %}
