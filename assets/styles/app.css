@@ -1,3 +1,21 @@
-body {
-    background-color: skyblue;
+@import "tailwindcss";
+@import "../vendor/daisyui/daisyui.min.css";
+
+@source "../../templates";
+
+/* Keep the page background independent of the DaisyUI theme defaults. */
+html[data-theme="light"],
+body.app-background {
+    background-color: #f1f3f5;
+}
+
+@layer base {
+    h1, h2, h3, p, dd, a {
+        overflow-wrap: anywhere;
+    }
+
+    a:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 4px;
+    }
 }

@@ -8,10 +8,12 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class HomeController extends AbstractController
 {
+    #[Route(path:'/', name:'app_home')]
     public function index(): Response 
     {
-        //exercice 1
-        //return new Response('Bienvenue sur mon application Symfony');
-        return $this->render('home/index.html.twig');
+        return $this->render('home/index.html.twig',[
+            "titre"=> "Cours Twig symfony 2026",
+            "desc" => "Utilisation de l'InfoCard dans un template"
+        ]);
     }
 }

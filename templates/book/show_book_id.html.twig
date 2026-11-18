@@ -1,26 +1,26 @@
-{% extends "base.html.twig" %}
-{% block title %} 
-Liste des livres
-{% endblock %}
+{% extends 'base.html.twig' %}
+{% block title %}{{ book ? book.title : 'Livre introuvable' }} · Bibliothèque{% endblock %}
 {% block body %}
-
-    {% if book %}
-    <h1>Détail du livre </h1>
-       <article>
-        <h2>Titre {{ book.title }}</h2>
-        <textarea readonly>{{ book.resume }}</textarea>
-        <h3>Date de publication {{ book.publishAt | date('d-m-Y') }}</h3>
-        <h3>Auteur :  {{ book.author }} </h3>
-        <h3>Appartiens à : {{ book.user.firstname }} . {{ book.user.lastname }}</h3>
-        <ul>
-        {% for category in book.categories %}
-            <li>{{ category.name }}</li>
-        {% endfor %}
-        </ul>
-       </article> 
-    {% else %}
-    <h2>La Livre n'existe pas</h2>        
-    {% endif %}
-    <a href="{{ path('app_books')}}">Retour à la liste</a>
-
+<a class="btn btn-ghost btn-sm mb-6" href="{{ path('app_books') }}"><span aria-hidden="true">←</span> Retour aux livres</a>
+{% if book %}
+<article class="card border border-base-300 bg-base-100 shadow-sm">
+    <div class="card-body gap-8 p-6 sm:p-10">
+        <header><p class="mb-3 text-sm font-medium uppercase tracking-widest text-base-content/50">Détail du livre</p><h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">{{ book.title }}</h1><p class="mt-3 text-lg text-base-content/60">Par {{ book.author }}</p></header>
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+            <section class="lg:col-span-2"><h2 class="mb-4 text-lg font-semibold">Résumé</h2><p class="whitespace-pre-line leading-8 text-base-content/75">{{ book.resume ?: 'Aucun résumé disponible.' }}</p></section>
+            <aside class="rounded-box bg-base-200 p-6">
+                <h2 class="mb-5 font-semibold">Informations</h2>
+                <dl class="space-y-5 text-sm">
+                    <div><dt class="mb-1 text-base-content/60">Date de publication</dt><dd class="font-medium">{{ book.publishAt ? book.publishAt|date('d/m/Y') : 'Non renseignée' }}</dd></div>
+                    <div><dt class="mb-1 text-base-content/60">Propriétaire</dt><dd class="font-medium">{% if book.user %}<a class="link link-hover" href="{{ path('app_user', {id: book.user.id}) }}">{{ book.user.firstname }} {{ book.user.lastname }}</a>{% else %}Non renseigné{% endif %}</dd></div>
+                </dl>
+                <h3 class="mb-3 mt-6 text-sm text-base-content/60">Catégories</h3>
+                <ul class="flex flex-wrap gap-2">{% for category in book.categories %}<li><a class="badge badge-outline h-auto min-h-7 py-1" href="{{ path('app_category', {id: category.id}) }}">{{ category.name }}</a></li>{% else %}<li class="text-sm text-base-content/60">Aucune catégorie</li>{% endfor %}</ul>
+            </aside>
+        </div>
+    </div>
+</article>
+{% else %}
+<div class="rounded-box border border-base-300 bg-base-100 p-10 text-center"><h1 class="text-2xl font-semibold">Livre introuvable</h1><p class="mt-3 text-base-content/60">Ce livre n’existe pas dans la bibliothèque.</p></div>
+{% endif %}
 {% endblock %}

@@ -1,14 +1,20 @@
-{% extends "base.html.twig" %}
-{% block title %}Page détail{% endblock %}
+{% extends 'base.html.twig' %}
+{% block title %}{{ user ? user.firstname ~ ' ' ~ user.lastname : 'Fiche introuvable' }} · Bibliothèque{% endblock %}
 {% block body %}
-{% if user %}
-    <h1>Profil utilisateur</h1>
-    <h2>Nom : {{ user.lastname }}</h2>
-    <h3>Prénom : {{ user.firstname }}</h3>
-    <h3>Email : {{ user.email }}</h3>
-    <h3>Id : {{ user.id }}</h3>
-{% else %}
-    <h2>Le user n'existe pas</h2>
-{% endif %}
-<a href="{{ path('app_users') }}">Retour à la liste</a>
-{% endblock body %}
+<a class="btn btn-ghost btn-sm mb-6" href="{{ path('app_users') }}"><span aria-hidden="true">←</span> Retour aux utilisateurs</a>
+<article class="card mx-auto max-w-3xl border border-base-300 bg-base-100 shadow-sm">
+    <div class="card-body gap-8 p-6 sm:p-10">
+        {% if user %}
+            <header><p class="mb-3 text-sm font-medium uppercase tracking-widest text-base-content/50">Profil utilisateur</p><h1 class="text-3xl font-semibold tracking-tight">{{ user.firstname ~ ' ' ~ user.lastname }}</h1></header>
+            <dl class="grid grid-cols-1 gap-6 border-t border-base-300 pt-8 sm:grid-cols-2">
+                <div><dt class="text-sm text-base-content/60">Prénom</dt><dd class="mt-2 font-medium">{{ user.firstname }}</dd></div>
+                <div><dt class="text-sm text-base-content/60">Nom</dt><dd class="mt-2 font-medium">{{ user.lastname }}</dd></div>
+                <div><dt class="text-sm text-base-content/60">Adresse e-mail</dt><dd class="mt-2 font-medium">{{ user.email }}</dd></div>
+                <div><dt class="text-sm text-base-content/60">Identifiant</dt><dd class="mt-2 font-medium">#{{ user.id }}</dd></div>
+            </dl>
+        {% else %}
+            <h1 class="text-2xl font-semibold">Utilisateur introuvable</h1><p class="text-base-content/60">Cette fiche n’existe pas dans la bibliothèque.</p>
+        {% endif %}
+    </div>
+</article>
+{% endblock %}

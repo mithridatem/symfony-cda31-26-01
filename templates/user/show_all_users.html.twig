@@ -1,20 +1,24 @@
-{% extends "base.html.twig" %}
-{% block title %}Liste des Users{% endblock %}
+{% extends 'base.html.twig' %}
+{% block title %}Les utilisateurs · Bibliothèque{% endblock %}
 {% block body %}
-    <section>
-        <h1>Liste des utilisateurs</h1>
-        {% if users %}
-        {% for user in users %}
-            <article>
-                <h2>Prénom : {{ user.firstname }}</h2>
-                <h2>Nom : {{ user.lastname }}</h2>
-                <a href=""></a>
+<section aria-labelledby="page-title">
+    <header class="mb-8 flex flex-wrap items-end justify-between gap-4">
+        <div><p class="mb-2 text-sm font-medium uppercase tracking-widest text-base-content/50">Bibliothèque</p><h1 id="page-title" class="text-3xl font-semibold tracking-tight sm:text-4xl">Les utilisateurs</h1><p class="mt-3 text-base-content/60">Retrouvez les membres de la bibliothèque.</p></div>
+        <span class="badge badge-outline">{{ users|length }} résultat(s)</span>
+    </header>
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {% for item in users %}
+            <article class="card min-w-0 border border-base-300 bg-base-100 shadow-sm">
+                <div class="card-body gap-4 p-6">
+                    <div aria-hidden="true" class="flex size-12 items-center justify-center rounded-full bg-base-200 text-sm font-semibold">{{ item.firstname|slice(0, 1)|upper }}{{ item.lastname|slice(0, 1)|upper }}</div>
+                    <h2 class="card-title text-xl">{{ item.firstname ~ ' ' ~ item.lastname }}</h2>
+                    <p class="text-sm text-base-content/60">Membre de la bibliothèque</p>
+                    <div class="card-actions mt-4 justify-end"><a class="btn btn-neutral btn-sm" href="{{ path('app_user', {id: item.id}) }}" aria-label="Voir le détail : {{ item.firstname ~ ' ' ~ item.lastname }}">Voir le détail <span aria-hidden="true">→</span></a></div>
+                </div>
             </article>
-            <a href="{{ path('app_user', {id: user.id }) }}">Détail</a>
-            <hr>
-        {% endfor %}
         {% else %}
-        <h2>La liste des users est vide</h2>    
-        {% endif %}
-    </section>
-{% endblock body %}
+            <div class="col-span-full rounded-box border border-dashed border-base-300 bg-base-100 p-10 text-center"><h2 class="text-lg font-medium">La liste est vide</h2><p class="mt-2 text-base-content/60">Les utilisateurs apparaîtront ici.</p></div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

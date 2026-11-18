@@ -1,20 +1,24 @@
-{% extends "base.html.twig" %}
-{% block title %}
-Liste des categories
-{% endblock %}
+{% extends 'base.html.twig' %}
+{% block title %}Les catégories · Bibliothèque{% endblock %}
 {% block body %}
-<section>
-    {% if categories %}
-    <h1>Liste des categories</h1>
-        {# boucler sur la liste des categories #}
-        {% for category in categories %}
-            <article>
-                <h2>{{ category.name }}</h2>
-                <a href="{{ path('app_category', {id: category.id }) }}">Détail</a>
+<section aria-labelledby="page-title">
+    <header class="mb-8 flex flex-wrap items-end justify-between gap-4">
+        <div><p class="mb-2 text-sm font-medium uppercase tracking-widest text-base-content/50">Bibliothèque</p><h1 id="page-title" class="text-3xl font-semibold tracking-tight sm:text-4xl">Les catégories</h1><p class="mt-3 text-base-content/60">Explorez les différents univers de la bibliothèque.</p></div>
+        <span class="badge badge-outline">{{ categories|length }} résultat(s)</span>
+    </header>
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {% for item in categories %}
+            <article class="card min-w-0 border border-base-300 bg-base-100 shadow-sm">
+                <div class="card-body gap-4 p-6">
+                    <span class="text-xs font-medium uppercase tracking-widest text-base-content/50">Catégorie</span>
+                    <h2 class="card-title text-xl">{{ item.name }}</h2>
+
+                    <div class="card-actions mt-4 justify-end"><a class="btn btn-neutral btn-sm" href="{{ path('app_category', {id: item.id}) }}" aria-label="Voir le détail : {{ item.name }}">Voir le détail <span aria-hidden="true">→</span></a></div>
+                </div>
             </article>
+        {% else %}
+            <div class="col-span-full rounded-box border border-dashed border-base-300 bg-base-100 p-10 text-center"><h2 class="text-lg font-medium">La liste est vide</h2><p class="mt-2 text-base-content/60">Les catégories apparaîtront ici.</p></div>
         {% endfor %}
-    {% else %}
-    <h2>La liste est vide</h2>
-    {% endif %}
-</section>  
+    </div>
+</section>
 {% endblock %}

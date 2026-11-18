@@ -1,17 +1,18 @@
-{% extends "base.html.twig" %}
-{% block title %}
-Détail category
-{% endblock %}
+{% extends 'base.html.twig' %}
+{% block title %}{{ category ? category.name : 'Fiche introuvable' }} · Bibliothèque{% endblock %}
 {% block body %}
-<section>
-    {% if category %}
-    <article>
-        <h2>Name : {{ category.name }}</h2>
-        <h3>Id : {{ category.id }}</h3>
-    </article>
-    {% else %}
-    <h2>La category n'existe pas</h2>
-    {% endif %}
-    <a href="{{ path('app_categories') }}">Retour</a>
-</section>  
+<a class="btn btn-ghost btn-sm mb-6" href="{{ path('app_categories') }}"><span aria-hidden="true">←</span> Retour aux catégories</a>
+<article class="card mx-auto max-w-3xl border border-base-300 bg-base-100 shadow-sm">
+    <div class="card-body gap-8 p-6 sm:p-10">
+        {% if category %}
+            <header><p class="mb-3 text-sm font-medium uppercase tracking-widest text-base-content/50">Détail de la catégorie</p><h1 class="text-3xl font-semibold tracking-tight">{{ category.name }}</h1></header>
+            <dl class="grid grid-cols-1 gap-6 border-t border-base-300 pt-8 sm:grid-cols-2">
+
+                <div><dt class="text-sm text-base-content/60">Identifiant</dt><dd class="mt-2 font-medium">#{{ category.id }}</dd></div>
+            </dl>
+        {% else %}
+            <h1 class="text-2xl font-semibold">Catégorie introuvable</h1><p class="text-base-content/60">Cette fiche n’existe pas dans la bibliothèque.</p>
+        {% endif %}
+    </div>
+</article>
 {% endblock %}
