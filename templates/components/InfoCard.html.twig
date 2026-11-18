@@ -1,6 +1,13 @@
 {# templates/components/InfoCard.html.twig #}
-{% props title, description %}
-<article>
-    <h2>{{ title }}</h2>
-    <p>{{ description }}</p>
+{% props objet, title  %}
+<article class="card min-w-0 border border-base-300 bg-base-100 shadow-sm">
+    <div class="card-body gap-4 p-6">
+        <span class="text-xs font-medium uppercase tracking-widest text-base-content/50">{{ title }}</span>
+        <h2 class="card-title text-xl">{{ objet.name }}</h2>
+
+        <div class="card-actions mt-4 justify-end"><a class="btn btn-neutral btn-sm"
+            href="{{ path('app_category', {id: objet.id}) }}" aria-label="Voir le détail : {{ objet.name }}">Voir le
+            détail <span aria-hidden="true">→</span></a>
+        </div>
+    </div>
 </article>
