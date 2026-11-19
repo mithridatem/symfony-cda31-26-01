@@ -59,7 +59,31 @@ class BookRepository extends ServiceEntityRepository
             ->where('b.publishAt  <= :date')
             ->setParameter('date', $date)
             ->getQuery()
+            ->setMaxResults(10)
             ->getResult()
         ;
+    }
+
+    public function findByCategory(string $categoryName): array
+    {
+        return $this->createQueryBuilder('b')
+            ->innerJoin('b.categories', 'categories')
+            ->where('categories.name = :category')
+            ->setParameter('category', $categoryName)
+            ->orderBy('b.id')
+            ->getQuery()
+            ->getResult();
+    }
+
+
+    public function findByCategories(array $categories): array
+    {
+        return $this->createQueryBuilder('b')
+            ->innerJoin('b.categories', 'cats')
+            ->where('cats.name IN (:categories)')
+            ->setParameter('categories', $categories)
+            ->orderBy('b.id')
+            ->getQuery()
+            ->getResult();
     }
 }

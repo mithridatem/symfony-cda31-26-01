@@ -39,4 +39,22 @@ class BookService
                 new \DateTimeImmutable($date)
             );
     }
+
+    public function getBooksByCategoryName(string $categoryName): array
+    {
+        return $this->bookRepository->findByCategory($categoryName);
+    }
+
+    public function getBooksByCategoriesName(string $categories): array
+    {
+        $categories = explode(',', $categories);
+        return $this->bookRepository->findByCategories($categories);
+    }
+
+    
+    public function getBooksByCategoriesNameV2(array $categories): array
+    {
+
+        return $this->bookRepository->findByCategories($categories);
+    }
 }
