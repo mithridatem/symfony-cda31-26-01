@@ -7,6 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use App\Entity\User;
+use App\DTO\UserListDTO;
+use App\DTO\UserToUserDTOWrapper;
 
 final class UserController extends AbstractController
 {
@@ -48,6 +51,29 @@ final class UserController extends AbstractController
 
         return $this->render('user/show_user_id.html.twig', [
             "user" => $user
+        ]);
+    }
+
+    #[Route(path: '/users/dto/{id}', name: 'app_user_dto')]
+    public function showUserListDTOById(int $id): Response
+    {
+        $user = $this->userService->getUserById($id);
+
+        if ($user) UserToUserDTOWrapper::wrapUserToUserListDTO($user);
+        
+        return $this->render('user/show_user_dto_id.html.twig', [
+            "user" => $user ?? null
+        ]);
+    }
+
+    
+    #[Route(path: '/users/dtov2/{id}', name: 'app_user_dto')]
+    public function showUserListDTOByIdV2(int $id): Response
+    {
+        $user = $this->userService->getUserListDTOById($id);
+        
+        return $this->render('user/show_user_dto_id.html.twig', [
+            "user" => $user ?? null
         ]);
     }
 }
