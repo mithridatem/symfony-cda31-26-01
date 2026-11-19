@@ -51,7 +51,6 @@ class BookService
         return $this->bookRepository->findByCategories($categories);
     }
 
-    
     public function getBooksByCategoriesNameV2(array $categories): array
     {
 
