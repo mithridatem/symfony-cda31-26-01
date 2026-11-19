@@ -63,7 +63,7 @@ class CategoryController extends AbstractController
 
             $this->addFlash('notice', $msg);
 
-           return $this->redirectToRoute('app_category_new');
+            return $this->redirectToRoute('app_category_new');
         }
 
         return $this->render('category/category_new.html.twig', [
