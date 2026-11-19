@@ -11,9 +11,9 @@ class BookService
         private readonly BookRepository $bookRepository
     ) {}
 
-    public function getBookByTitle(string $title): ?Book 
+    public function getBookByTitle(string $title): ?Book
     {
-        return $this->bookRepository->findOneBy(["title"=> $title]);
+        return $this->bookRepository->findOneBy(["title" => $title]);
     }
 
     public function getBooks(): array
@@ -21,8 +21,22 @@ class BookService
         return $this->bookRepository->findAll() ?? [];
     }
 
-    public function getBookById(int $id): ?Book 
+    public function getBookById(int $id): ?Book
     {
         return $this->bookRepository->find($id);
+    }
+
+    public function getBooksByTitle(string $title): array
+    {
+        return $this->bookRepository->findByTitle($title);
+    }
+
+    public function getBooksByAfterPublishAt(string $date): array
+    {
+        return $this
+            ->bookRepository
+            ->findPublishedAfter(
+                new \DateTimeImmutable($date)
+            );
     }
 }
