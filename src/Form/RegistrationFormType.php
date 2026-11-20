@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -66,12 +67,17 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
             ->add('firstname', TextType::class, [
+                'attr'=>['class'=> ''],
+                'label_attr' =>['class'=> ''],
                 'label' => 'Saisir votre prénom',
                 'required' => false
             ])
             ->add('lastname', TextType::class, [
                 'label' => 'Saisir votre prénom',
                 'required' => false
+            ])
+            ->add('save', SubmitType::class,[
+                'label'=> 'Ajouter'
             ])
         ;
     }

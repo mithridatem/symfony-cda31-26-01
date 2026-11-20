@@ -54,7 +54,7 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
         
         if ($form->isSubmitted()) {
-            //ajouter avec le CategoryService::saevCategory
+            //ajouter avec le CategoryService::saveCategory
             $msg = $this->categoryService->saveCategory($category);
 
             $this->addFlash('notice', $msg);
