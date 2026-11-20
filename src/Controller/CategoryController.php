@@ -10,6 +10,8 @@ use App\Service\CategoryService;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use App\Form\CategoryType;
 use App\Entity\Category;
+use Symfony\Component\Security\Core\Role\Role;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class CategoryController extends AbstractController
 {
@@ -40,15 +42,8 @@ class CategoryController extends AbstractController
         ]);
     }
 
-/*     #[Route('/category/{id}', name: 'app_category')]
-    public function showCategoryById(int $id): Response
-    {
-        return $this->render('category/show_category_id.html.twig', [
-            "category" => $this->categoryService->getCategoryById($id)
-        ]);
-    } */
-
     #[Route(path:'/category/new', name:'app_category_new', methods:["GET", "POST"])]
+    #[IsGranted('ROLE_ADMIN', message:'Vous n\'est pas autorisé')]
     public function new(Request $request):Response 
     {
         $category = new Category();

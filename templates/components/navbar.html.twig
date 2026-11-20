@@ -1,5 +1,6 @@
 {# templates/components/Navbar.html.twig #}
-<a href="#main-content" class="btn btn-neutral fixed left-4 top-4 z-50 -translate-y-24 focus:translate-y-0">Aller au contenu</a>
+<a href="#main-content" class="btn btn-neutral fixed left-4 top-4 z-50 -translate-y-24 focus:translate-y-0">Aller au
+    contenu</a>
 <header class="border-b border-base-300 bg-base-100">
     <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-5 sm:px-8">
         <a href="{{ path('app_books') }}" class="text-xl font-semibold tracking-tight">Bibliothèque<span
@@ -13,6 +14,12 @@
             <a href="{{ path(item.route) }}" class="btn btn-sm {{ active ? 'btn-neutral' : 'btn-ghost' }}" {% if active
                 %} aria-current="page" {% endif %}>{{ item.label }}</a>
             {% endfor %}
+            {% if app.user.userIdentifier is defined %}
+            <a href="{{ path('app_logout')}}" class="btn btn-sm btn-neutral">Se déconnecter</a>
+            {% else %}
+            <a href="{{ path('app_register')}}" class="btn btn-sm btn-neutral">S'inscrire</a>
+            <a href="{{ path('app_login')}}" class="btn btn-sm btn-neutral">Se connecter</a>
+            {% endif %}
         </nav>
     </div>
 </header>

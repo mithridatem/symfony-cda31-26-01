@@ -11,9 +11,8 @@
         {{ form_label(registrationForm.email) }}
         {{ form_widget(registrationForm.email) }}
         {{ form_errors(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
+        {{ form_widget(registrationForm.plainPassword) }}
+        {{ form_errors(registrationForm.plainPassword) }}
         {{ form_row(registrationForm.firstname) }}
         {{ form_row(registrationForm.lastname) }}
         {{ form_row(registrationForm.agreeTerms) }}
