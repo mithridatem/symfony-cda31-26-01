@@ -10,7 +10,6 @@ use App\Service\CategoryService;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use App\Form\CategoryType;
 use App\Entity\Category;
-use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class CategoryController extends AbstractController
@@ -21,6 +20,7 @@ class CategoryController extends AbstractController
     ) {}
 
     #[Route(path: '/categories', name: 'app_categories')]
+    #[IsGranted('ROLE_USER')]
     public function showAllCategories(): Response
     {
         //Récupération de toutes les catégories de la BDD
@@ -32,6 +32,7 @@ class CategoryController extends AbstractController
     }
 
     #[Route(path: '/categoriesv2', name: 'app_categories')]
+    #[IsGranted('ROLE_USER')]
     public function showAllCategoriesv2(): Response
     {
         //Récupération de toutes les catégories de la BDD
