@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block title %}Category{% endblock %}
+{% block body %}
+{{ form_start(form) }}
+{{ form_label(form.name) }}
+<div>{{ form_widget(form.name) }}</div>
+{{ form_errors(form.name) }}
+{{ form_rest(form) }}
+{{ form_end(form) }}
+<twig:Toast />
+{% endblock %}

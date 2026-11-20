@@ -15,11 +15,13 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                "attr" => ["class" => "input"]
+                'attr' => ['class' => '', 'placeholder'=>'nom catégorie de livre ...'],
+                'label'=> 'Saisir le nom de la catégorie'
             ])
             ->add('save', SubmitType::class, [
-                'attr' => ['class' => 'save'],
-                'label'=> 'ajouter'
+                'attr' => ['class' => 'btn mt-2'],
+                //Assignation de la valeur de la propriété
+                'label'=> $options['label_save_edit']
             ]);
     }
 
@@ -27,6 +29,10 @@ class CategoryType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Category::class,
+            //Valeur par défault de la propriété
+            'label_save_edit' => 'Ajouter'
         ]);
+        //Ajout d'une propriété (nom et type)
+        $resolver->setAllowedTypes('label_save_edit', 'string');
     }
 }

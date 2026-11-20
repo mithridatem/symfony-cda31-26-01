@@ -24,7 +24,7 @@ class CategoryService
     }
 
 
-    public function saveCategory(Category $category): string 
+    public function saveOrUpdateCategory(Category $category): string 
     {
         $this->em->persist($category);
         $this->em->flush();
