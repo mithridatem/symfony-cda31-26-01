@@ -4,11 +4,13 @@ namespace App\Service;
 
 use App\Entity\Book;
 use App\Repository\BookRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 class BookService
 {
     public function __construct(
-        private readonly BookRepository $bookRepository
+        private readonly BookRepository $bookRepository,
+        private readonly EntityManagerInterface $em
     ) {}
 
     public function getBookByTitle(string $title): ?Book
@@ -55,5 +57,12 @@ class BookService
     {
 
         return $this->bookRepository->findByCategories($categories);
+    }
+
+    public function saveBook(Book $book): void
+    {
+        $this->em->persist($book);
+
+        $this->em->flush();
     }
 }

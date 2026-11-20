@@ -16,6 +16,7 @@
             {% if app.user.userIdentifier is defined %}
                 {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('app_category_new')}}" class="btn btn-sm btn-ghost">Ajouter une categorie</a>
+                    <a href="{{ path('app_book_new')}}" class="btn btn-sm btn-ghost">Ajouter un Livre</a>
                 {% endif %}
             <a href="{{ path('app_categories')}}" class="btn btn-sm btn-ghost">Liste des categories</a>
             <a href="{{ path('app_logout')}}" class="btn btn-sm btn-neutral">Se déconnecter</a>

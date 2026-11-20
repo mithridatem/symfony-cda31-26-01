@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Book;
+use App\Form\BookType;
 use App\Service\BookService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class BookController extends AbstractController
 {
@@ -85,5 +88,29 @@ class BookController extends AbstractController
         return $this->render('book/show_all_books.html.twig', [
             'books' => $book
         ]);
+    }
+
+    #[Route(path:'/book/new', name:'app_book_new')]
+    #[IsGranted('ROLE_ADMIN', message:'Vous n\'etes pas autorisé')]
+    public function new(Request $request): Response
+    {
+        $book = new Book();
+
+        $form = $this->createForm(BookType::class, $book);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+
+            $this->bookService->saveBook($book);
+
+            $this->addFlash('notice', 'Le livre ' . $book->getTitle() . ' a été ajouté');
+
+            return $this->redirectToRoute('app_book_new');
+        }
+
+        return $this->render('book/book_form.html.twig', [
+            'form'=> $form
+        ]); 
     }
 }

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block title %}Ajouter un livre{% endblock %}
+{% block body %}
+<h1>Ajouter un Livre</h1>
+{{ form_start(form) }}
+{{ form_label(form.title) }}
+<div>{{ form_widget(form.title) }}</div>
+{{ form_errors(form.title) }}
+{{ form_label(form.resume) }}
+<div>{{ form_widget(form.resume) }}</div>
+{{ form_errors(form.resume) }}
+{{ form_label(form.author) }}
+<div>{{ form_widget(form.author) }}</div>
+{{ form_errors(form.author) }}
+{{ form_label(form.publishAt) }}
+<div>{{ form_widget(form.publishAt) }}</div>
+{{ form_errors(form.publishAt) }}
+{{ form_rest(form) }}
+{{ form_end(form) }}
+<twig:Toast/>
+{% endblock %}
