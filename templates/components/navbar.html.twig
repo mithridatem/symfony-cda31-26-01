@@ -7,7 +7,7 @@
         {% set current_route = app.request.attributes.get('_route') %}
         <nav aria-label="Navigation principale" class="flex flex-wrap gap-1">
             {% for item in [{label: 'Livres', route: 'app_books', detail: 'app_book'}, {label: 'Catégories', route:
-            'app_categories', detail: 'app_category'}, {label: 'Utilisateurs', route: 'app_users', detail: 'app_user'}]
+            'app_categories', detail: 'app_category'}]
             %}
             {% set active = current_route in [item.route, item.detail] %}
             <a href="{{ path(item.route) }}" class="btn btn-sm {{ active ? 'btn-neutral' : 'btn-ghost' }}" {% if active
