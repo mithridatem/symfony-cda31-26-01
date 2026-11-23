@@ -28,7 +28,7 @@ class BookType extends AbstractType
 
             ])
             ->add('publishAt', DateType::class, [
-                 'widget' => 'single_text',
+                'widget' => 'single_text',
                 'input'  => 'datetime_immutable',
                 'required'=> true
             ])

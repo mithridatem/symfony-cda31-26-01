@@ -68,6 +68,7 @@ class CategoryController extends AbstractController
     }
 
     #[Route(path: '/category/{id}/edit', name: 'app_category_edit')]
+    #[IsGranted('ROLE_ADMIN', message: 'Vous n\'avez pas l\'authorisation')]
     public function edit(int $id, Request $request): Response
     {
         $category = $this->categoryService->getCategoryById($id);
@@ -77,8 +78,8 @@ class CategoryController extends AbstractController
             $this->addFlash('notice', "Categorie n'existe pas");
 
             return $this->redirectToRoute('app_category_new');
-        } 
-            
+        }
+
         $form = $this->createForm(CategoryType::class, $category, [
             'label_save_edit' => 'Modifier'
         ]);
@@ -90,11 +91,12 @@ class CategoryController extends AbstractController
 
             $this->addFlash('notice', 'Categorie mise à jour');
 
-            return $this->redirectToRoute('app_category_edit' , ['id'=> $id]);
+            return $this->redirectToRoute('app_category_edit', ['id' => $id]);
         }
 
         return $this->render(
-            'category/category_new_edit.html.twig', [
+            'category/category_new_edit.html.twig',
+            [
                 'form' => $form
             ]
         );
