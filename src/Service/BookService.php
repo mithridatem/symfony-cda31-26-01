@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Book;
 use App\Repository\BookRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BookService
 {
@@ -64,5 +65,13 @@ class BookService
         $this->em->persist($book);
 
         $this->em->flush();
+    }
+
+    public function deleteBook(?Book $book): void 
+    {
+        if (null === $book) throw new NotFoundHttpException('Le livre n\'existe pas');
+        $this->em->remove($book);
+        $this->em->flush();
+      
     }
 }

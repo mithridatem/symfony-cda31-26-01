@@ -1,0 +1,6 @@
+{% props form, message %}
+
+{{ form_start(form, {attr: {'data-turbo-confirm': message}}) }}
+    {{ form_widget(form.delete, {attr: {class: 'btn-error btn-sm'}}) }}
+    {{ form_rest(form) }}
+{{ form_end(form) }}

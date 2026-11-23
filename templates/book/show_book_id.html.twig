@@ -37,9 +37,16 @@
                             class="badge badge-outline h-auto min-h-7 py-1" href="">{{ category.name }}</a></li>{% else
                     %}<li class="text-sm text-base-content/60">Aucune catégorie</li>{% endfor %}</ul>
             </aside>
-             <a class="btn btn-neutral btn-sm" href="{{ path('app_book_edit', {id: book.id}) }}"
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+            <a class="btn btn-neutral btn-sm" href="{{ path('app_book_edit', {id: book.id}) }}"
                 aria-label="Modifie {{ book.title }}">Modifier
             </a>
+            {% if deleteForm %}
+                <twig:ConfirmDeleteForm 
+                :form="deleteForm" 
+                message="Supprimer le livre" />
+            {% endif %}
         </div>
 
     </div>
