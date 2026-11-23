@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class BookType extends AbstractType
 {
@@ -45,6 +46,9 @@ class BookType extends AbstractType
                 // used to render a select box, check boxes or radios
                 'multiple' => true,
                 'expanded' => false,
+            ])
+            ->add('cover', FileType::class, [
+                'label'=> 'Importer une image de couverture'
             ])
             ->add('save', SubmitType::class, [
                 'label' => $options['label_save_edit'],

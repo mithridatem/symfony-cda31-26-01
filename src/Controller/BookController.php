@@ -14,6 +14,7 @@ use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class BookController extends AbstractController
 {
@@ -108,6 +109,19 @@ class BookController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
+
+            //Récupération du fichier
+            $file = $form->get('cover')->getData();
+            //test si il est bien téléchargé
+            if (null != $file) {
+                //Récupération du nom
+                $fileName = $file->getClientOriginalName();
+                //set du nom du fichier
+                $book->setCover($fileName);
+
+                //Déplacer dans le dossier public/images
+                $file->move('images/', $file->getClientOriginalName());
+            }
 
             $this->bookService->saveBook($book);
 

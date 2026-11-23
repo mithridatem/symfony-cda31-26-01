@@ -26,7 +26,7 @@ class UserProfileController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
 
             $this->userService->editProfile($user);
 

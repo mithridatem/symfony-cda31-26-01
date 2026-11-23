@@ -27,6 +27,9 @@
     }
 }) }}
 {{ form_errors(form.categories) }}
+{{ form_label(form.cover) }}
+<div>{{ form_widget(form.cover) }}</div>
+{{ form_errors(form.cover) }}
 {{ form_rest(form) }}
 {{ form_end(form) }}
 <twig:Toast/>
