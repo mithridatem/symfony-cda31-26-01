@@ -31,7 +31,7 @@ class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route(path: '/categoriesv2', name: 'app_categories')]
+    #[Route(path: '/categoriesv2', name: 'app_categories_v2')]
     #[IsGranted('ROLE_USER')]
     public function showAllCategoriesv2(): Response
     {
