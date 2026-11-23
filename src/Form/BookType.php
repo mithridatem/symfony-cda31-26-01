@@ -47,8 +47,8 @@ class BookType extends AbstractType
                 'expanded' => false,
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'Ajouter',
-                'attr' => ['class' => 'btn mt-2'],
+                'label' => $options['label_save_edit'],
+                'attr' => ['class' => 'btn mt-2']
             ])
         ;
     }
@@ -57,6 +57,8 @@ class BookType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Book::class,
+            'label_save_edit' => 'Ajouter'
         ]);
+         $resolver->setAllowedTypes('label_save_edit', 'string');
     }
 }
