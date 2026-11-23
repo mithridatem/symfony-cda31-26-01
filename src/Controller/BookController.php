@@ -109,7 +109,7 @@ class BookController extends AbstractController
             return $this->redirectToRoute('app_book_new');
         }
 
-        return $this->render('book/book_form.html.twig', [
+        return $this->render('book/book_new.html.twig', [
             'form'=> $form
         ]); 
     }

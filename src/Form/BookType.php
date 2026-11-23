@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Book;
+use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -10,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class BookType extends AbstractType
 {
@@ -19,26 +21,33 @@ class BookType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => 'Titre du livre',
                 'attr' => ['placeholder' => 'titre'],
-                'required'=> true
+                'required' => true
             ])
             ->add('resume', TextareaType::class, [
                 'label' => 'résumé du livre',
                 'attr' => ['placeholder' => 'resumé'],
-                'required'=> true
+                'required' => true
 
             ])
             ->add('publishAt', DateType::class, [
                 'widget' => 'single_text',
                 'input'  => 'datetime_immutable',
-                'required'=> true
+                'required' => true
             ])
-            ->add('author',TextType::class, [
+            ->add('author', TextType::class, [
                 'label' => 'Auteur du livre',
                 'attr' => ['placeholder' => 'auteur'],
-                'required'=> true
+                'required' => true
+            ])
+            ->add('categories', EntityType::class, [
+                // looks for choices from this entity
+                'class' => Category::class,
+                // used to render a select box, check boxes or radios
+                'multiple' => true,
+                'expanded' => false,
             ])
             ->add('save', SubmitType::class, [
-                'label'=> 'Ajouter',
+                'label' => 'Ajouter',
                 'attr' => ['class' => 'btn mt-2'],
             ])
         ;

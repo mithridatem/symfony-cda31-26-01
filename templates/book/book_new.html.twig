@@ -1,4 +1,6 @@
 {% extends 'base.html.twig' %}
+{% form_theme form.categories 'form_div_layout.html.twig' %}
+
 {% block title %}Ajouter un livre{% endblock %}
 {% block body %}
 <h1>Ajouter un Livre</h1>
@@ -15,6 +17,16 @@
 {{ form_label(form.publishAt) }}
 <div>{{ form_widget(form.publishAt) }}</div>
 {{ form_errors(form.publishAt) }}
+{{ form_row(form.categories, {
+    label: 'Catégories',
+    label_attr: {class: 'font-medium'},
+    row_attr: {class: 'mt-4 grid max-w-md gap-2'},
+    attr: {
+        size: 4,
+        class: 'block w-full appearance-auto rounded-md border border-base-content/20 bg-base-100 p-2 text-base-content focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary'
+    }
+}) }}
+{{ form_errors(form.categories) }}
 {{ form_rest(form) }}
 {{ form_end(form) }}
 <twig:Toast/>
