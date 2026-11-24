@@ -27,7 +27,8 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            
+            $user->setIcon('profil.png');
             //Récupération du fichier
             $icon = $form->get('icon')->getData();
             //test si le fichier est importé
