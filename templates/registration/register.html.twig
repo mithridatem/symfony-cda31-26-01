@@ -13,6 +13,7 @@
     {{ form_row(registrationForm.plainPassword.second)}}
     {{ form_row(registrationForm.firstname)}}
     {{ form_row(registrationForm.lastname)}}
+    {{ form_row(registrationForm.icon)}}
         {# {{ form_label(registrationForm.email) }}
         {{ form_widget(registrationForm.email) }}
         {{ form_errors(registrationForm.email) }}
@@ -28,7 +29,7 @@
         {{ form_row(registrationForm.firstname) }}
         {{ form_row(registrationForm.lastname) }}#}
         {{ form_row(registrationForm.agreeTerms) }} 
-
+        {{ form_rest(registrationForm) }}
         {# <button type="submit" class="btn">Register</button> #}
     {{ form_end(registrationForm) }}
 {% endblock %}

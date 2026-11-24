@@ -11,9 +11,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class RegistrationController extends AbstractController
 {
+    public function __construct(
+        private readonly SluggerInterface $slugger
+    ) {}
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
@@ -22,6 +27,27 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //Récupération du fichier
+            $icon = $form->get('icon')->getData();
+            //test si le fichier est importé
+            if ($icon) {
+                //Récupération du fichier
+                $originalFilename = pathinfo($icon->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $this->slugger->slug($originalFilename);
+                //Renommage du fichier
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $icon->guessExtension();
+                //Déplacement du fichier
+                try {
+                    $icon->move($this->getParameter('upload_directory'), $newFilename);
+                } catch (FileException $e) {
+                    $this->addFlash('notice', "error :" . $e->getMessage());
+                }
+                //Set du nom du fichier renommé
+                $user->setIcon($newFilename);
+            }
+
             /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
 
