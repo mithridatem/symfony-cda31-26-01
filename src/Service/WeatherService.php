@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface;
 
 class WeatherService
 {
@@ -21,9 +22,23 @@ class WeatherService
                 $url
             );
             return $response->toArray();
-        } catch(\Exception $e) {
-
+        } catch (\Exception $e) {
         }
-       return [];
+        return [];
+    }
+
+    public function getWeatherCity(string $city): array
+    {
+        $url = "https://api.openweathermap.org/data/2.5/weather?q=" . $city . "&appid=" . $this->apiKey . "&units=metric";
+
+        try {
+            $response = $this->httpClient->request(
+                'GET',
+                $url
+            );
+            return $response->toArray();
+        } catch (HttpExceptionInterface $e) {
+            return ["cod" => $e->getCode()];
+        }
     }
 }

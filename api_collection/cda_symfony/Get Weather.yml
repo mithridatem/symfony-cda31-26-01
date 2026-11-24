@@ -1,0 +1,28 @@
+info:
+  name: "Get Weather "
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: https://api.openweathermap.org/data/2.5/weather?lon=1.44&lat=43.6&appid=fca47910bc8f346f8c62cb9817eabcfb&units=metric
+  params:
+    - name: lon
+      value: "1.44"
+      type: query
+    - name: lat
+      value: "43.6"
+      type: query
+    - name: appid
+      value: fca47910bc8f346f8c62cb9817eabcfb
+      type: query
+    - name: units
+      value: metric
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
