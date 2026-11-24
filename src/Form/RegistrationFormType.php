@@ -27,6 +27,7 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Saisir un email'
             ])
             ->add('agreeTerms', CheckboxType::class, [
+                'label' => 'Accepter les conditions générales',
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue(
@@ -69,8 +70,8 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
             ->add('firstname', TextType::class, [
-                'attr'=>['class'=> ''],
-                'label_attr' =>['class'=> ''],
+                'attr' => ['class' => ''],
+                'label_attr' => ['class' => ''],
                 'label' => 'Saisir votre prénom',
                 'required' => false
             ])
@@ -90,8 +91,8 @@ class RegistrationFormType extends AbstractType
                     )
                 ],
             ])
-            ->add('save', SubmitType::class,[
-                'label'=> 'Ajouter'
+            ->add('save', SubmitType::class, [
+                'label' => 'S\'inscrire'
             ])
         ;
     }
